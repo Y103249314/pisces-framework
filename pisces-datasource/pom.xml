@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pisces.framework</groupId>
-	<artifactId>dynamic-mybatis-datasource</artifactId>
+	<artifactId>pisces-datasource</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>dynamic-mybatis-datasource</name>
-	<description>dynamic mybatis datasource</description>
+	<name>pisces-datasource</name>
+	<description>dynamic datasource</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
