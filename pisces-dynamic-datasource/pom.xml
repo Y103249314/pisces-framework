@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.pisces.framework</groupId>
-	<artifactId>pisces-datasource</artifactId>
+	<artifactId>pisces-dynamic-datasource</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>pisces-datasource</name>
+	<name>pisces-dynamic-datasource</name>
 	<description>dynamic datasource</description>
 
 	<parent>

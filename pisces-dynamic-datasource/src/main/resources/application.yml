@@ -3,7 +3,7 @@ server:
   
 spring:
   application:
-    name: dynamic-mybatis-datasource
+    name: pisces-dynamic-datasource
 
 datasource:
   jdbc:
