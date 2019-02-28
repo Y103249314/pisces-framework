@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pisces.framework.datasource.dao.DataSourceDAO" >
+  <resultMap id="BaseResultMap" type="com.pisces.framework.datasource.pojo.DataSourceBaseDO" >
+    <id column="tenant" property="tenant" jdbcType="INTEGER" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="FullResultMap" type="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    <id column="tenant" property="tenant" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="group" property="group" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    tenant, domain, REPLACE(url, "{tenant}", tenant) AS url, username, password
+  </sql>
+  
+  <sql id="Full_Column_List" >
+    tenant, domain, name, REPLACE(url, "{tenant}", tenant) AS url, username, password, `group`, status, 
+    create_time, create_by, update_time, update_by
+  </sql>
+  
+  <select id="selectBaseByTenant" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_datasource
+    where tenant = #{tenant,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectBaseByDomain" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_datasource
+    where domain = #{domain,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectBaseList" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_datasource
+  </select>
+  
+  <select id="selectByTenant" resultMap="FullResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Full_Column_List" />
+    from sys_datasource
+    where tenant = #{tenant,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectByDomain" resultMap="FullResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Full_Column_List" />
+    from sys_datasource
+    where domain = #{domain,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectList" resultMap="BaseResultMap">
+    select 
+    <include refid="Full_Column_List" />
+    from sys_datasource
+  </select>
+  
+  <delete id="deleteByTenant" parameterType="java.lang.Integer" >
+    delete from sys_datasource
+    where tenant = #{tenant,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    insert into sys_datasource (tenant, domain, name, url, username, password, 
+	  `group`, status, create_time, create_by, update_time, update_by)
+    values (#{tenant,jdbcType=INTEGER}, #{domain,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+	  #{url,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{group,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP},  
+      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    insert into sys_datasource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tenant != null" >
+        tenant,
+      </if>
+      <if test="domain != null" >
+        domain,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+	  <if test="name != null" >
+        url,
+      </if>
+	  <if test="name != null" >
+        username,
+      </if>
+	  <if test="name != null" >
+        password,
+      </if>
+      <if test="group != null" >
+        `group`,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tenant != null" >
+        #{tenant,jdbcType=INTEGER},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+	  <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByTenantSelective" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    update sys_datasource
+    <set >
+      <if test="domain != null" >
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+	  <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+	  <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+	  <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        `group` = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tenant = #{tenant,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByDomainSelective" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    update sys_datasource
+    <set >
+      <if test="tenant != null" >
+        tenant = #{tenant,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+	  <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+	  <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+	  <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        `group` = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where domain = #{domain,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByTenant" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    update sys_datasource
+    set name = #{name,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where tenant = #{tenant,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByDomain" parameterType="com.pisces.framework.datasource.pojo.DataSourceDO" >
+    update sys_datasource
+    set tenant = #{tenant,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+	  url = #{url,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where domain = #{domain,jdbcType=VARCHAR}
+  </update>
+</mapper>
