@@ -1,8 +1,7 @@
 /**
- * Copyright (c) 2017 Pisces Technology Co., Ltd.
+ * Copyright (c) 2018 Pisces Technology Co., Ltd.
  */
 package com.pisces.framework.datasource.config;
-
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;

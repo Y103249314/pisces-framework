@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: pisces-file-service
+
+datasource:
+  jdbc:
+    name: default-datasource
+    jdbc-url: jdbc:mysql://localhost:3306/pisces_datasource?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    minimum-idle: 5
+    idle-timeout: 180000
+    maximum-pool-size: 10
+    auto-commit: true
+    pool-name: DefaultHikariCP
+    max-lifetime: 1800000
+    connection-timeout: 30000
+    connection-test-query: SELECT 1
+
+fastdfs:
+  default_group: group1
+  connect_timeout: 60
+  network_timeout: 80
+  tracker_servers: 192.168.1.5:22122,192.168.1.6:22122
+  http_anti_steal_token: false
+  http_tracker_http_port: 8888  

@@ -1,3 +1,6 @@
+/**
+ * Copyright (c) 2018 Pisces Technology Co., Ltd.
+ */
 package com.pisces.framework.datasource.pojo;
 
 import java.io.Serializable;

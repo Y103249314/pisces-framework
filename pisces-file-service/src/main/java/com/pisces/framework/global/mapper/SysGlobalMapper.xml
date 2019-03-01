@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pisces.framework.global.dao.SysGlobalDAO">
+    <resultMap id="sysGlobalDO" type="com.pisces.framework.global.pojo.SysGlobalDO">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="key" property="key" jdbcType="VARCHAR" />
+        <result column="value" property="value" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <select id="findList" resultMap="sysGlobalDO">
+       SELECT * FROM sys_global
+    </select>
+    
+    <select id="findByKey" parameterType="java.lang.String" resultMap="sysGlobalDO">
+       SELECT * FROM sys_global WHERE key=#{key}
+    </select>
+    
+    <insert id="insert" parameterType="com.pisces.framework.global.pojo.SysGlobalDO">
+        INSERT INTO sys_agency
+        (
+            key, value 
+            <if test="type != null">,type</if>
+            <if test="description != null">,description</if> 
+            <if test="createBy != null">,create_by</if> 
+            <if test="createDate != null">,create_date</if> 
+            <if test="updateBy != null">,update_by</if> 
+            <if test="updateDate != null">,update_date</if>
+        )
+        VALUES
+        (
+            #{key}, #{value}
+            <if test="type != null">, #{type}</if>
+            <if test="description != null">, #{description}</if> 
+            <if test="createBy != null">, #{createBy}</if> 
+            <if test="createDate != null">, #{createDate}</if> 
+            <if test="updateBy != null">, #{updateBy}</if> 
+            <if test="updateDate != null">, #{updateDate}</if>
+        )
+    </insert>
+    
+    <update id="update" parameterType="com.pisces.framework.global.pojo.SysGlobalDO">
+        UPDATE sys_global
+        <set> 
+            <if test="key != null">
+                key = #{key,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null">
+                value = #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if> 
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if> 
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=VARCHAR},
+            </if> 
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if> 
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate == null">
+                update_date = CURRENT_TIMESTAMP,
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM sys_global WHERE id = #{id}
+    </delete>
+    
+    <delete id="deleteByKey" parameterType="java.lang.String">
+        DELETE FROM sys_global WHERE key = #{key}
+    </delete>
+    
+</mapper>
