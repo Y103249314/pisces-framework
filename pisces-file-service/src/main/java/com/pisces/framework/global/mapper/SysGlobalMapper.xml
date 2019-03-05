@@ -18,15 +18,15 @@
     </select>
     
     <select id="findByKey" parameterType="java.lang.String" resultMap="sysGlobalDO">
-       SELECT * FROM sys_global WHERE key=#{key}
+       SELECT * FROM sys_global WHERE `key`=#{key}
     </select>
     
     <insert id="insert" parameterType="com.pisces.framework.global.pojo.SysGlobalDO">
         INSERT INTO sys_agency
         (
-            key, value 
-            <if test="type != null">,type</if>
-            <if test="description != null">,description</if> 
+            `key`, `value`
+            <if test="type != null">,`type`</if>
+            <if test="description != null">,`description`</if> 
             <if test="createBy != null">,create_by</if> 
             <if test="createDate != null">,create_date</if> 
             <if test="updateBy != null">,update_by</if> 
@@ -48,16 +48,16 @@
         UPDATE sys_global
         <set> 
             <if test="key != null">
-                key = #{key,jdbcType=VARCHAR},
+                `key` = #{key,jdbcType=VARCHAR},
             </if>
             <if test="value != null">
-                value = #{value,jdbcType=VARCHAR},
+                `value` = #{value,jdbcType=VARCHAR},
             </if>
             <if test="type != null">
-                type = #{type,jdbcType=VARCHAR},
+                `type` = #{type,jdbcType=VARCHAR},
             </if>
             <if test="description != null">
-                description = #{description,jdbcType=VARCHAR},
+                `description` = #{description,jdbcType=VARCHAR},
             </if> 
             <if test="createBy != null">
                 create_by = #{createBy,jdbcType=VARCHAR},
@@ -83,7 +83,7 @@
     </delete>
     
     <delete id="deleteByKey" parameterType="java.lang.String">
-        DELETE FROM sys_global WHERE key = #{key}
+        DELETE FROM sys_global WHERE `key` = #{key}
     </delete>
     
 </mapper>
