@@ -1,0 +1,608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.accumulatech.generator.mapper.NumberPoolDao">
+  <resultMap id="BaseResultMap" type="com.accumulatech.generator.entity.NumberPoolDo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="rent_time" jdbcType="TIMESTAMP" property="rentTime" />
+    <result column="rent_fee_month" jdbcType="INTEGER" property="rentFeeMonth" />
+    <result column="call_fee_minute" jdbcType="INTEGER" property="callFeeMinute" />
+    <result column="call_end_time" jdbcType="TIMESTAMP" property="callEndTime" />
+    <result column="call_times" jdbcType="INTEGER" property="callTimes" />
+    <result column="call_minutes" jdbcType="INTEGER" property="callMinutes" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, status, rent_time, rent_fee_month, call_fee_minute, call_end_time, call_times, 
+    call_minutes, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from number_pool
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from number_pool
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample">
+    delete from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    insert into number_pool (id, number, status, 
+      rent_time, rent_fee_month, call_fee_minute, 
+      call_end_time, call_times, call_minutes, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{rentTime,jdbcType=TIMESTAMP}, #{rentFeeMonth,jdbcType=INTEGER}, #{callFeeMinute,jdbcType=INTEGER}, 
+      #{callEndTime,jdbcType=TIMESTAMP}, #{callTimes,jdbcType=INTEGER}, #{callMinutes,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    insert into number_pool
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="rentTime != null">
+        rent_time,
+      </if>
+      <if test="rentFeeMonth != null">
+        rent_fee_month,
+      </if>
+      <if test="callFeeMinute != null">
+        call_fee_minute,
+      </if>
+      <if test="callEndTime != null">
+        call_end_time,
+      </if>
+      <if test="callTimes != null">
+        call_times,
+      </if>
+      <if test="callMinutes != null">
+        call_minutes,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="rentTime != null">
+        #{rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentFeeMonth != null">
+        #{rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="callFeeMinute != null">
+        #{callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="callEndTime != null">
+        #{callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callTimes != null">
+        #{callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="callMinutes != null">
+        #{callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample" resultType="java.lang.Long">
+    select count(*) from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update number_pool
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.rentTime != null">
+        rent_time = #{record.rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rentFeeMonth != null">
+        rent_fee_month = #{record.rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.callFeeMinute != null">
+        call_fee_minute = #{record.callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="record.callEndTime != null">
+        call_end_time = #{record.callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.callTimes != null">
+        call_times = #{record.callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.callMinutes != null">
+        call_minutes = #{record.callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update number_pool
+    set id = #{record.id,jdbcType=BIGINT},
+      number = #{record.number,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      rent_time = #{record.rentTime,jdbcType=TIMESTAMP},
+      rent_fee_month = #{record.rentFeeMonth,jdbcType=INTEGER},
+      call_fee_minute = #{record.callFeeMinute,jdbcType=INTEGER},
+      call_end_time = #{record.callEndTime,jdbcType=TIMESTAMP},
+      call_times = #{record.callTimes,jdbcType=INTEGER},
+      call_minutes = #{record.callMinutes,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    update number_pool
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="rentTime != null">
+        rent_time = #{rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentFeeMonth != null">
+        rent_fee_month = #{rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="callFeeMinute != null">
+        call_fee_minute = #{callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="callEndTime != null">
+        call_end_time = #{callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callTimes != null">
+        call_times = #{callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="callMinutes != null">
+        call_minutes = #{callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    update number_pool
+    set number = #{number,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      rent_time = #{rentTime,jdbcType=TIMESTAMP},
+      rent_fee_month = #{rentFeeMonth,jdbcType=INTEGER},
+      call_fee_minute = #{callFeeMinute,jdbcType=INTEGER},
+      call_end_time = #{callEndTime,jdbcType=TIMESTAMP},
+      call_times = #{callTimes,jdbcType=INTEGER},
+      call_minutes = #{callMinutes,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.accumulatech.generator.entity.NumberPoolDo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="rent_time" jdbcType="TIMESTAMP" property="rentTime" />
+    <result column="rent_fee_month" jdbcType="INTEGER" property="rentFeeMonth" />
+    <result column="call_fee_minute" jdbcType="INTEGER" property="callFeeMinute" />
+    <result column="call_end_time" jdbcType="TIMESTAMP" property="callEndTime" />
+    <result column="call_times" jdbcType="INTEGER" property="callTimes" />
+    <result column="call_minutes" jdbcType="INTEGER" property="callMinutes" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, number, status, rent_time, rent_fee_month, call_fee_minute, call_end_time, call_times, 
+    call_minutes, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from number_pool
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from number_pool
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample">
+    delete from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    insert into number_pool (id, number, status, 
+      rent_time, rent_fee_month, call_fee_minute, 
+      call_end_time, call_times, call_minutes, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{rentTime,jdbcType=TIMESTAMP}, #{rentFeeMonth,jdbcType=INTEGER}, #{callFeeMinute,jdbcType=INTEGER}, 
+      #{callEndTime,jdbcType=TIMESTAMP}, #{callTimes,jdbcType=INTEGER}, #{callMinutes,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    insert into number_pool
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="rentTime != null">
+        rent_time,
+      </if>
+      <if test="rentFeeMonth != null">
+        rent_fee_month,
+      </if>
+      <if test="callFeeMinute != null">
+        call_fee_minute,
+      </if>
+      <if test="callEndTime != null">
+        call_end_time,
+      </if>
+      <if test="callTimes != null">
+        call_times,
+      </if>
+      <if test="callMinutes != null">
+        call_minutes,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="rentTime != null">
+        #{rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentFeeMonth != null">
+        #{rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="callFeeMinute != null">
+        #{callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="callEndTime != null">
+        #{callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callTimes != null">
+        #{callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="callMinutes != null">
+        #{callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accumulatech.generator.entity.NumberPoolDoExample" resultType="java.lang.Long">
+    select count(*) from number_pool
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update number_pool
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.rentTime != null">
+        rent_time = #{record.rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rentFeeMonth != null">
+        rent_fee_month = #{record.rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="record.callFeeMinute != null">
+        call_fee_minute = #{record.callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="record.callEndTime != null">
+        call_end_time = #{record.callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.callTimes != null">
+        call_times = #{record.callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.callMinutes != null">
+        call_minutes = #{record.callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update number_pool
+    set id = #{record.id,jdbcType=BIGINT},
+      number = #{record.number,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      rent_time = #{record.rentTime,jdbcType=TIMESTAMP},
+      rent_fee_month = #{record.rentFeeMonth,jdbcType=INTEGER},
+      call_fee_minute = #{record.callFeeMinute,jdbcType=INTEGER},
+      call_end_time = #{record.callEndTime,jdbcType=TIMESTAMP},
+      call_times = #{record.callTimes,jdbcType=INTEGER},
+      call_minutes = #{record.callMinutes,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    update number_pool
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="rentTime != null">
+        rent_time = #{rentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rentFeeMonth != null">
+        rent_fee_month = #{rentFeeMonth,jdbcType=INTEGER},
+      </if>
+      <if test="callFeeMinute != null">
+        call_fee_minute = #{callFeeMinute,jdbcType=INTEGER},
+      </if>
+      <if test="callEndTime != null">
+        call_end_time = #{callEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="callTimes != null">
+        call_times = #{callTimes,jdbcType=INTEGER},
+      </if>
+      <if test="callMinutes != null">
+        call_minutes = #{callMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accumulatech.generator.entity.NumberPoolDo">
+    update number_pool
+    set number = #{number,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      rent_time = #{rentTime,jdbcType=TIMESTAMP},
+      rent_fee_month = #{rentFeeMonth,jdbcType=INTEGER},
+      call_fee_minute = #{callFeeMinute,jdbcType=INTEGER},
+      call_end_time = #{callEndTime,jdbcType=TIMESTAMP},
+      call_times = #{callTimes,jdbcType=INTEGER},
+      call_minutes = #{callMinutes,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
